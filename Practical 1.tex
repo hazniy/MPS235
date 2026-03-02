@@ -1,0 +1,207 @@
+\documentclass[11pt, a4paper]{article}
+% \usepackage[pdftex, left=2.5cm+12pt, right=2.5cm-10pt, top=3cm, bottom=2.5cm]{geometry}
+\usepackage[pdftex,left=37mm,right=30mm,top=35mm,bottom=30mm]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[cp1252]{inputenc} %Windows
+\usepackage{abstract}
+\usepackage{mathtools}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage[svgnames]{xcolor}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage[labelfont=bf,labelsep=period,font=small,textfont=sl,width=0.85\textwidth, tableposition=top]{caption}
+\usepackage[pdftex, colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue, anchorcolor=blue, filecolor=blue]{hyperref}
+\usepackage[sort]{natbib}
+
+
+
+\newcommand*{\authorfont}{\fontfamily{phv}\selectfont}
+\renewcommand{\abstractname}{}    % clear the title
+\renewcommand{\absnamepos}{empty} % originally center
+
+\renewenvironment{abstract}
+ {{%
+    \setlength{\leftmargin}{0mm}
+    \setlength{\rightmargin}{\leftmargin}%
+  }%
+  \relax}
+ {\endlist}
+
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \let \footnote \thanks
+    {\fontsize{18}{20}\selectfont\raggedright  \setlength{\parindent}{0pt} \@title \par}%
+}
+\makeatother
+
+
+\setcounter{secnumdepth}{2}
+
+
+\titleformat*{\section}{\normalsize\bfseries}
+\titleformat*{\subsection}{\normalsize\itshape}
+\titleformat*{\subsubsection}{\normalsize\itshape}
+\titleformat*{\paragraph}{\normalsize\itshape}
+\titleformat*{\subparagraph}{\normalsize\itshape}
+
+% set default figure placement to htbp
+\makeatletter
+% \def\fps@figure{htbp}
+\def\fps@figure{ht}
+\makeatother
+
+
+% add tightlist ----------
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% ________________________________________________________-
+% ________________________________________________________-
+
+\title{Statistical Evidence of Unusual Buchanan Support in Palm Beach County During the 2000 Florida Election \\
+\authorfont{\small \textbf{240145846}} }
+\date{02/03/2026}
+
+% ________________________________________________________-
+% ________________________________________________________-
+\begin{document}
+	
+
+\maketitle
+
+
+\begin{abstract}
+    \hbox{\vrule height .2pt width 39.14pc}
+    \vskip 8.5pt % \small 
+
+\noindent A brief summary of the main quantitative and qualitative results.
+
+A linear regression model was fitted to county-level data from the 2000 Florida presidential election to examine the relationship between votes for George W. Bush and votes for Pat Buchanan. The results show a strong positive and statistically significant association ($p < 0.001$), with approximately 39\% of the variation in Buchanan votes explained by Bush votes. However, Palm Beach County is an extreme outlier: its Buchanan vote total (3407) is far above the predicted value (approximately 797) and lies well outside the 99\% prediction interval. This unusually large deviation is consistent with concerns that the butterfly ballot may have caused voter confusion, although causation cannot be proven from this analysis.
+
+  \hbox{\vrule height .2pt width 39.14pc}
+\end{abstract}
+
+
+\vskip 6.5pt
+
+
+\section{Background} \label{sec:background}
+The 2000 United States presidential election in Florida was highly controversial. One major criticism concerned the ``butterfly ballot'' used in Palm Beach County. Critics argued that the ballot layout may have confused voters, potentially causing individuals who intended to vote for George W. Bush to accidentally vote for Pat Buchanan.
+
+This study investigates whether Buchanan's vote counts across Florida counties follow a systematic pattern relative to Bush's votes, and whether Palm Beach County deviates unusually from that pattern.
+
+\subsection*{Data Description}
+
+The dataset contains vote counts for 67 Florida counties. Variables include county name, votes for Bush, votes for Buchanan, votes for other candidates, and total votes. The analysis focuses on the relationship between Bush and Buchanan vote totals at the county level.
+
+\subsection*{Exploratory Data Analysis}
+
+A scatterplot of Buchanan votes versus Bush votes shows a clear positive linear relationship. Most counties follow a consistent upward trend, while Palm Beach County appears substantially above the general pattern, suggesting the presence of an outlier.
+
+
+\section{Modelling} \label{sec:models}
+
+\subsection{Model Specification}
+
+We formalise the relationship using a simple linear regression model:
+
+\begin{equation}
+\text{BUCHANAN}_i = \beta_0 + \beta_1 \text{BUSH}_i + \varepsilon_i,
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\text{BUCHANAN}_i$ denotes Buchanan votes in county $i$,
+    \item $\text{BUSH}_i$ denotes Bush votes in county $i$,
+    \item $\varepsilon_i \sim N(0, \sigma^2)$.
+\end{itemize}
+
+\subsection{Assumptions}
+
+The model assumes:
+\begin{itemize}
+    \item Linearity between Bush and Buchanan votes,
+    \item Independence of counties,
+    \item Homoscedastic errors,
+    \item Normally distributed residuals.
+\end{itemize}
+
+\subsection{Model Fitting and Selection}
+
+The model was fitted using ordinary least squares (OLS). A reduced intercept-only model,
+\[
+\text{BUCHANAN}_i = \beta_0 + \varepsilon_i,
+\]
+was also fitted for comparison. An ANOVA F-test showed that including Bush votes significantly improves model fit ($p < 0.001$).
+
+\section{Results} \label{sec:results}
+
+\subsection{Regression Results}
+
+\begin{table}[h!]
+\centering
+\caption{Linear regression results for predicting Buchanan votes from Bush votes across 67 Florida counties. Coefficients are shown with 95\% confidence intervals.}
+\begin{tabular}{lccc}
+\toprule
+Predictor & Estimate & 95\% CI \\
+\midrule
+Bush votes & 0.004917*** & (0.0034, 0.0064) \\
+Constant & 45.29 & (-63.6, 154.2) \\
+\midrule
+Observations & 67 &  \\
+$R^2$ & 0.389 &  \\
+Residual Std. Error & 353.9 (df = 65) &  \\
+F Statistic & 41.37*** (df = 1; 65) &  \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize{Note: ***$p < 0.01$}
+\end{table}
+
+\subsection{Interpretation}
+
+The slope estimate (0.004917) indicates that for every additional 1,000 Bush votes, approximately 5 Buchanan votes are expected. The relationship is highly statistically significant. Approximately 39\% of the variation in Buchanan votes is explained by Bush votes.
+
+Palm Beach County is an extreme outlier. The predicted Buchanan vote count for Palm Beach is approximately 797, whereas the observed value is 3407. The 99\% prediction interval is (-175, 1769), meaning the observed value lies far outside the range expected under the model.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{scatterplot_placeholder}
+\caption{Scatterplot of Buchanan votes versus Bush votes for all Florida counties. The fitted regression line shows the expected linear relationship. Palm Beach County appears as a clear outlier above the trend line, indicating unusually high Buchanan support relative to Bush votes.}
+\end{figure}
+
+\section{Conclusions} \label{sec:conclusions}
+
+\subsection{Findings in Context}
+
+The regression analysis demonstrates a strong positive association between Bush and Buchanan votes across Florida counties. However, Palm Beach County exhibits a dramatic deviation from the expected pattern. The number of Buchanan votes there is far greater than predicted and statistically extremely unlikely under the fitted model.
+
+These findings are consistent with the hypothesis that ballot design may have influenced voting outcomes in Palm Beach County.
+
+\subsection{Scope and Limitations}
+
+This analysis is limited by the use of aggregate county-level data. It cannot identify individual voting errors, determine exactly how many votes were miscast, or definitively establish causation. Other unobserved factors such as demographic or political characteristics are not controlled for. The model also assumes linearity and constant variance.
+
+\subsection{Future Work}
+
+Further investigation could incorporate demographic covariates, precinct-level data, robust regression techniques, or simulation-based inference to better quantify uncertainty and potential causal mechanisms.
+
+\section*{References}
+
+\begin{itemize}
+\item Mood, A. M., Graybill, F. A., and Boes, D. C. (1974). \textit{Introduction to the Theory of Statistics}. Wiley, New York, 3rd edition.
+\item Nino, D., Rafiei, N., Wang, Y., Zilman, A., and Milstein, J. N. (2017). Molecular Counting with Localization Microscopy: A Bayesian Estimate Based on Fluorophore Statistics. \textit{Biophysical Journal}, 112(9):1777--1785.
+\item Stan Development Team (2025). \textit{RStan: the R interface to Stan}. R package version 2.32.7. \url{https://mc-stan.org/}
+\end{itemize}
+
+\end{document}
+
+\bibliographystyle{apalike}
+\bibliography{References}
+
+	
+\end{document}
