@@ -1,0 +1,284 @@
+\documentclass[11pt, a4paper]{article}
+% \usepackage[pdftex, left=2.5cm+12pt, right=2.5cm-10pt, top=3cm, bottom=2.5cm]{geometry}
+\usepackage[pdftex,left=37mm,right=30mm,top=35mm,bottom=30mm]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[cp1252]{inputenc} %Windows
+\usepackage{abstract}
+\usepackage{mathtools}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage[svgnames]{xcolor}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage[labelfont=bf,labelsep=period,font=small,textfont=sl,width=0.85\textwidth, tableposition=top]{caption}
+\usepackage[pdftex, colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue, anchorcolor=blue, filecolor=blue]{hyperref}
+\usepackage[sort]{natbib}
+
+
+
+\newcommand*{\authorfont}{\fontfamily{phv}\selectfont}
+\renewcommand{\abstractname}{}    % clear the title
+\renewcommand{\absnamepos}{empty} % originally center
+
+\renewenvironment{abstract}
+ {{%
+    \setlength{\leftmargin}{0mm}
+    \setlength{\rightmargin}{\leftmargin}%
+  }%
+  \relax}
+ {\endlist}
+
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \let \footnote \thanks
+    {\fontsize{18}{20}\selectfont\raggedright  \setlength{\parindent}{0pt} \@title \par}%
+}
+\makeatother
+
+
+\setcounter{secnumdepth}{2}
+
+
+\titleformat*{\section}{\normalsize\bfseries}
+\titleformat*{\subsection}{\normalsize\itshape}
+\titleformat*{\subsubsection}{\normalsize\itshape}
+\titleformat*{\paragraph}{\normalsize\itshape}
+\titleformat*{\subparagraph}{\normalsize\itshape}
+
+% set default figure placement to htbp
+\makeatletter
+% \def\fps@figure{htbp}
+\def\fps@figure{ht}
+\makeatother
+
+
+% add tightlist ----------
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% ________________________________________________________-
+% ________________________________________________________-
+
+\title{Statistical Analysis of the Relationship Between BPVT Scores and Reading Age Deficiency \\
+\authorfont{\small \textbf{240145846}} }
+\date{13/03/2026}
+
+% ________________________________________________________-
+% ________________________________________________________-
+\begin{document}
+	
+
+\maketitle
+
+
+\begin{abstract}
+    \hbox{\vrule height .2pt width 39.14pc}
+    \vskip 8.5pt % \small 
+
+\noindent A brief summary of the main quantitative and qualitative results.
+
+\subsection*{Quantitative Results}
+
+\begin{itemize}
+\item The correlation between BPVT and Reading Age Deficiency (RAD) is $0.54$, indicating a moderate positive relationship.
+\item The estimated regression coefficient for BPVT is $0.626$, meaning that for every one-unit increase in BPVT, RAD increases by approximately $0.63$ units.
+\item The relationship is statistically significant with a p-value of $0.000985$, providing strong evidence of an association between BPVT and RAD.
+\item The coefficient of determination is $R^2 = 0.291$, meaning that approximately $29\%$ of the variation in reading age deficiency is explained by BPVT scores.
+\item A quadratic model was tested but was not statistically significant ($p = 0.6135$), indicating that a simple linear model adequately describes the relationship.
+\end{itemize}
+
+\subsection*{Qualitative Results}
+
+\begin{itemize}
+\item There is clear evidence of a positive relationship between BPVT scores and reading age deficiency.
+\item The relationship between the variables is best described by a linear model rather than a quadratic model.
+\item BPVT scores provide some indication of reading difficulties and may help identify children who could be at risk of dyslexia.
+\item However, BPVT explains only part of the variation in reading ability, suggesting that other factors also influence dyslexia and reading performance.
+\item Therefore, BPVT should be considered as a supportive assessment tool rather than a definitive diagnostic test for dyslexia.
+\end{itemize}
+
+  \hbox{\vrule height .2pt width 39.14pc}
+\end{abstract}
+
+
+\vskip 6.5pt
+
+
+\section{Background} \label{sec:background}
+
+Dyslexia is a learning difficulty that primarily affects the skills involved in accurate and fluent reading. Individuals with dyslexia often experience challenges with reading comprehension, spelling, and word recognition. Early identification of reading difficulties is important in order to provide appropriate educational support and intervention.
+
+One commonly used assessment related to language ability is the British Picture Vocabulary Test (BPVT). The BPVT measures a person's receptive vocabulary by asking participants to identify pictures corresponding to spoken words. Because vocabulary knowledge is closely related to language development and reading ability, BPVT scores may provide useful information when assessing potential reading difficulties.
+
+In this study, the relationship between BPVT scores and Reading Age Deficiency (RAD) is examined. Reading Age Deficiency represents the difference between a child's expected reading age and their actual reading performance. A larger RAD value indicates greater difficulty with reading relative to what would normally be expected.
+
+The aim of this analysis is to investigate whether BPVT scores are associated with reading age deficiency and whether BPVT could potentially be useful in identifying children who may have dyslexia. Exploratory data analysis and regression modelling are used to examine the strength and form of the relationship between these variables.
+
+\subsection*{Data Description}
+
+The dataset used in this analysis contains observations from 34 individuals and includes two variables related to language and reading ability. The first variable, \textbf{BPVT} (British Picture Vocabulary Test), measures receptive vocabulary ability. Higher BPVT scores indicate a stronger vocabulary. The second variable, \textbf{RAD} (Reading Age Deficiency), represents the difference between an individual's expected reading age and their observed reading performance. Larger RAD values indicate greater reading difficulty relative to the expected level.
+
+The aim of analysing these variables is to investigate whether BPVT scores are associated with reading age deficiency and to determine whether BPVT may provide useful information when identifying individuals who may have dyslexia.
+
+\subsection*{Exploratory Data Analysis}
+
+Exploratory data analysis (EDA) was conducted to examine the relationship between BPVT scores and reading age deficiency before fitting statistical models. Scatter plots were produced to visualise RAD against BPVT, as well as against transformations of BPVT such as $\log(\text{BPVT})$ and $\text{BPVT}^2$. These plots help identify whether the relationship between the variables appears linear or whether a transformation may provide a better description of the data.
+
+The scatter plot of RAD against BPVT suggests a positive association between the two variables, indicating that higher BPVT scores tend to be associated with higher values of reading age deficiency. Correlation analysis further supports this observation, with a correlation coefficient of approximately $0.54$, indicating a moderate positive relationship.
+
+Comparisons with transformations of BPVT, including the logarithmic and quadratic forms, did not provide a noticeably stronger relationship. Therefore, the exploratory analysis suggests that a simple linear relationship between BPVT and RAD may be sufficient for modelling the data.
+
+\section{Modelling} \label{sec:models}
+
+\subsection{Model Specification}
+To investigate the relationship between vocabulary ability and reading performance, we consider a linear regression model relating Reading Age Deficiency (RAD) to British Picture Vocabulary Test (BPVT) scores.
+
+The model is specified as
+
+\begin{equation}
+\text{RAD}_i = \beta_0 + \beta_1 \text{BPVT}_i + \varepsilon_i,
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\text{RAD}_i$ denotes the reading age deficiency for individual $i$,
+    \item $\text{BPVT}_i$ denotes the BPVT score for individual $i$,
+    \item $\varepsilon_i \sim N(0, \sigma^2)$ represents the random error term.
+\end{itemize}
+
+To assess whether a non-linear relationship may be present, an extended quadratic model was also considered:
+
+\begin{equation}
+\text{RAD}_i = \beta_0 + \beta_1 \text{BPVT}_i + \beta_2 \text{BPVT}_i^2 + \varepsilon_i.
+\end{equation}
+
+This model allows for potential curvature in the relationship between BPVT scores and reading age deficiency.
+
+\subsection{Assumptions}
+The regression analysis relies on the following standard assumptions:
+
+\begin{itemize}
+    \item A linear relationship between BPVT scores and reading age deficiency,
+    \item Independence of observations,
+    \item Homoscedasticity (constant variance of the error terms),
+    \item Normally distributed residuals.
+\end{itemize}
+
+\subsection{Model Fitting and Selection}
+
+The regression models were fitted using ordinary least squares (OLS). An initial
+quadratic model including both BPVT and $\text{BPVT}^2$ was fitted to investigate
+whether a non-linear relationship exists between BPVT scores and Reading Age
+Deficiency (RAD).
+
+An ANOVA comparison between the linear and quadratic models showed that the
+quadratic term was not statistically significant ($p = 0.6135$). This indicates
+that including the quadratic term does not significantly improve the model fit.
+
+Therefore, the simpler linear model was retained as the final model.
+
+To confirm that BPVT contributes significantly to explaining RAD, the linear
+model was also compared to a reduced intercept-only model:
+\[
+\text{RAD}_i = \beta_0 + \varepsilon_i.
+\]
+
+The ANOVA test showed that including BPVT significantly improves the model fit
+($p < 0.001$). This provides strong statistical evidence that BPVT scores are
+associated with reading age deficiency.
+
+\section{Results} \label{sec:results}
+
+\subsection{Regression Results}
+
+\begin{table}[h!]
+\centering
+\caption{Linear regression results for predicting Reading Age Deficiency (RAD)
+from BPVT scores. Coefficients are shown with 95\% confidence intervals.}
+\begin{tabular}{lccc}
+\toprule
+Predictor & Estimate & 95\% CI \\
+\midrule
+BPVT & 0.626*** & (0.275, 0.978) \\
+Constant & -19.417* & (-34.121, -4.714) \\
+\midrule
+Observations & 34 & \\
+$R^2$ & 0.291 & \\
+Residual Std. Error & 13.02 (df = 32) & \\
+F Statistic & 13.16*** (df = 1; 32) & \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize{Note: ***$p < 0.01$, *$p < 0.05$}
+\end{table}
+
+\subsection{Interpretation}
+
+The estimated regression coefficient for BPVT is 0.626, indicating that for
+every one-unit increase in BPVT score, reading age deficiency is expected to
+increase by approximately 0.63 units on average.
+
+The relationship is statistically significant ($p < 0.001$), providing strong
+evidence that BPVT scores are associated with reading age deficiency.
+
+The coefficient of determination ($R^2 = 0.291$) indicates that approximately
+29\% of the variation in reading age deficiency can be explained by BPVT scores.
+This suggests that BPVT provides some useful information about reading
+difficulties, although a substantial proportion of variation remains unexplained
+and may be due to other factors affecting reading ability.
+
+Overall, the results suggest that BPVT scores are related to reading age
+deficiency, but BPVT alone is unlikely to fully explain or diagnose dyslexia.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{bpvt_rad_regression}
+\caption{Scatterplot of Reading Age Deficiency (RAD) versus BPVT scores with
+the fitted linear regression line. The shaded bands represent the 99\%
+confidence interval for the mean response (red) and the 99\% prediction interval
+for individual observations (blue). The plot illustrates a positive linear
+relationship between BPVT scores and reading age deficiency.}
+\end{figure}
+
+\section{Conclusions} \label{sec:conclusions}
+
+\subsection{Findings in Context}
+
+The analysis investigated the relationship between British Picture Vocabulary Test (BPVT) scores and Reading Age Deficiency (RAD) in order to assess whether BPVT may be useful in identifying individuals with potential reading difficulties associated with dyslexia. The results show a statistically significant positive relationship between BPVT scores and RAD. The fitted linear regression model indicates that increases in BPVT scores are associated with increases in reading age deficiency, with an estimated slope of 0.626.
+
+The regression model explains approximately 29\% of the variation in RAD ($R^2 = 0.291$), suggesting that BPVT provides some information about reading difficulties. The quadratic model did not significantly improve the model fit, indicating that a simple linear relationship adequately describes the association between BPVT scores and reading age deficiency in this dataset.
+
+Overall, the findings suggest that BPVT may provide useful information when assessing reading ability, although it should not be used as the sole indicator of dyslexia.
+
+\subsection{Scope and Limitations}
+
+Several limitations should be considered when interpreting the results. First, the dataset contains only 34 observations, which represents a relatively small sample size. As a result, the findings may not generalise to a wider population.
+
+Second, the regression model explains only a moderate proportion of the variation in reading age deficiency. This indicates that many other factors influencing reading ability are not captured by BPVT scores alone.
+
+Finally, the analysis identifies an association between BPVT and RAD but does not establish a causal relationship. Therefore, the results cannot be used to conclude that BPVT directly determines reading ability or the presence of dyslexia.
+
+\subsection{Future Work}
+
+Future research could extend this analysis by including additional predictors related to reading ability, such as phonological awareness, cognitive ability, or educational background. Incorporating these factors may improve the explanatory power of the model and provide a more comprehensive understanding of the factors contributing to dyslexia.
+
+Further studies with larger and more diverse samples would also help determine whether the observed relationship between BPVT and reading age deficiency holds across different populations. In addition, alternative statistical models or diagnostic tools could be explored to improve the identification of individuals at risk of dyslexia.
+
+\section*{References}
+
+\begin{itemize}
+\item Mood, A. M., Graybill, F. A., and Boes, D. C. (1974). \textit{Introduction to the Theory of Statistics}. Wiley, New York, 3rd edition.
+\item Nino, D., Rafiei, N., Wang, Y., Zilman, A., and Milstein, J. N. (2017). Molecular Counting with Localization Microscopy: A Bayesian Estimate Based on Fluorophore Statistics. \textit{Biophysical Journal}, 112(9):1777--1785.
+\item Stan Development Team (2025). \textit{RStan: the R interface to Stan}. R package version 2.32.7. \url{https://mc-stan.org/}
+\end{itemize}
+
+\end{document}
+
+\bibliographystyle{apalike}
+\bibliography{References}
+
+	
+\end{document}
